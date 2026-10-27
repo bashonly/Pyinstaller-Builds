@@ -46,8 +46,8 @@ jobs:
           ARCHITECTURES = [{
               'name': 'x64',
               'runner': 'windows-2025',
-              'environment': 'MINGW64',
-              'prefix': 'mingw-w64-x86_64',
+              'environment': 'UCRT64',
+              'prefix': 'mingw-w64-ucrt-x86_64',
               'arch': '64bit',
               'compiler': 'gcc',
               'wheel_tag': 'win_amd64',
