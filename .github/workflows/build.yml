@@ -46,8 +46,8 @@ jobs:
           ARCHITECTURES = [{
               'name': 'x64',
               'runner': 'windows-2025',
-              'sys': 'MINGW64',
-              'env': 'x86_64',
+              'environment': 'MINGW64',
+              'prefix': 'mingw-w64-x86_64',
               'arch': '64bit',
               'compiler': 'gcc',
               'wheel_tag': 'win_amd64',
@@ -55,8 +55,8 @@ jobs:
           }, {
               'name': 'x86',
               'runner': 'windows-2025',
-              'sys': 'MINGW32',
-              'env': 'i686',
+              'environment': 'MINGW32',
+              'prefix': 'mingw-w64-i686',
               'arch': '32bit',
               'compiler': 'gcc',
               'wheel_tag': 'win32',
@@ -64,8 +64,8 @@ jobs:
           }, {
               'name': 'arm64',
               'runner': 'windows-11-arm',
-              'sys': 'CLANGARM64',
-              'env': 'clang-aarch64',
+              'environment': 'CLANGARM64',
+              'prefix': 'mingw-w64-clang-aarch64',
               'arch': '64bit-arm',
               'compiler': 'clang',
               'wheel_tag': 'win_arm64',
@@ -181,12 +181,12 @@ jobs:
         uses: msys2/setup-msys2@ec48f7c5447b3140e2b088413ae3a55687bccb6e  # v2.33.0
         with:
           update: true
-          msystem: ${{ matrix.sys }}
+          msystem: ${{ matrix.environment }}
           install: >-
             base-devel
-            mingw-w64-${{ matrix.env }}-toolchain
-            mingw-w64-${{ matrix.env }}-python
-            mingw-w64-${{ matrix.env }}-python-pip
+            ${{ matrix.prefix }}-toolchain
+            ${{ matrix.prefix }}-python
+            ${{ matrix.prefix }}-python-pip
 
       - name: Checkout Pyinstaller-Builds
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
